@@ -1,10 +1,13 @@
 package ru.avalon.java_pp.dev_j120;
-import java.util.Date;
+import ru.avalon.java_pp.dev_j120.controllers.OrdersController;
+import ru.avalon.java_pp.dev_j120.io.*;
+
 
 public class Main {
     public static void main(String[] args) {
-        Date date = new Date();
-        System.out.println ("Hello, world!!!");
-        System.out.println(date.toString());
+        OrdersController controller = new OrdersController();
+        
+        MainFrame f = new MainFrame(controller);
+        f.setVisible(true);
     }
 }
