@@ -9,11 +9,11 @@ public class Order {
     private int phone;
     private String address;
     private int percent;
-    private String status;
+    private Status status;
     private LocalDate date2;
     private OrderPosition OrderPosition;
 
-    public Order(LocalDate date1, String fio, int phone, String address, int percent, String status, LocalDate date2, OrderPosition orderPosition) {
+    public Order(LocalDate date1, String fio, int phone, String address, int percent, Status status, LocalDate date2, OrderPosition orderPosition) {
         this.date1 = date1;
         this.fio = fio;
         this.phone = phone;
@@ -24,24 +24,20 @@ public class Order {
         OrderPosition = orderPosition;
     }
 
-    public enum status {
-        preparing("готовится"),
-        shipped("отгружен"),
-        canceled("отменен");
+    public enum Status {
+        PREPARING("готовится"),
+        SHIPPED("отгружен"),
+        CANCELLED("отменен");
 
-        private String status;
+        private String Status;
 
-        status(String status) {
-            this.status = status;
+        Status(String Status) {
+            this.Status = Status;
         }
     }
 
     public LocalDate getDate1() {
         return date1;
-    }
-
-    public void setDate1(LocalDate date1) {
-        this.date1 = date1;
     }
 
     public String getFio() {
@@ -77,11 +73,9 @@ public class Order {
     }
 
     public String getStatus() {
-        return status;
+        return status.toString();
     }
 
-    public void setStatus(String status) { this.status = status;
-    }
 
     public LocalDate getDate2() {
         return date2;

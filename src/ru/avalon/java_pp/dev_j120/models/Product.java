@@ -9,11 +9,11 @@ public class Product {
     private Float price;
     private int quantity;
 
-    public Product(int art, String name, String color, Float price, int quantity){
-        this.setArt (art);
-        this.setName (name);
-        this.setColor (color);
-        this.setPrice (price);
+    public Product(int art, String name, String color, Float price, int quantity) {
+        this.art = art;
+        this.name = name;
+        this.color = color;
+        this.price = price;
         this.setQuantity (quantity);
     }
 
@@ -21,32 +21,16 @@ public class Product {
         return art;
     }
 
-    public void setArt(int art) {
-        this.art = art;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getColor() {
         return color;
     }
 
-    public void setColor(String color) {
-        this.color = color;
-    }
-
     public Float getPrice() {
         return price;
-    }
-
-    public void setPrice(Float price) {
-        this.price = price;
     }
 
     public int getQuantity() {
@@ -56,15 +40,6 @@ public class Product {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-
-// Обеспечение уникальности
-//    int art = 0;
-//
-//    int getUniqueId()
-//    {
-//        return art++;
-//    }
-
 
 
 
