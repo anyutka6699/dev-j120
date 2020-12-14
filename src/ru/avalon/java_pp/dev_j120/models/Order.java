@@ -40,6 +40,10 @@ public class Order {
         return date1;
     }
 
+    public void setDate1(LocalDate date1) {
+        this.date1 = date1;
+    }
+
     public String getFio() {
         return fio;
     }

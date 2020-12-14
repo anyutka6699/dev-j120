@@ -1,6 +1,5 @@
 package ru.avalon.java_pp.dev_j120.models;
 
-import javax.annotation.processing.Generated;
 
 public class Product {
     private int art;
@@ -16,6 +15,7 @@ public class Product {
         this.price = price;
         this.setQuantity (quantity);
     }
+
 
     public int getArt() {
         return art;
