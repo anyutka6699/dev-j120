@@ -30,9 +30,31 @@ public class OrdersStorage {
         public void saveOrders (List<Order> orders) throws IOException {
             try (ObjectOutputStream oos = new ObjectOutputStream(
                     new FileOutputStream(address_order))) {
-                    oos.writeObject(orders);
+                for (Order o : orders) {
+                    oos.writeObject(o);
+                }
             }
         }
 
+    public List<Order> ordersLoading(String file) {
+        List<Order> ordersList = new ArrayList<>();
+        if (Files.exists(Paths.get(address_order))) {
+            try (ObjectInputStream ois = new ObjectInputStream(
+                    new FileInputStream(file))) {
+                Order o = (Order) ois.readObject();
+                while (o != null) {
+                    ordersList.add(o);
+                    o = (Order) ois.readObject();
+                }
+                return ordersList;
+            } catch (EOFException ex) {
+                return ordersList;
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            return ordersList;
+        }
     }
+}
 

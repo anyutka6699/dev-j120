@@ -3,17 +3,14 @@ package ru.avalon.java_pp.dev_j120.uimodels;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 
 import ru.avalon.java_pp.dev_j120.controllers.OrdersController;
 import ru.avalon.java_pp.dev_j120.models.Order;
 import ru.avalon.java_pp.dev_j120.models.OrderPosition;
-import ru.avalon.java_pp.dev_j120.models.Product;
 
 public class OrdersTableModel implements TableModel {
     private static final String[] COLUMN_HEADERS = {
@@ -23,20 +20,18 @@ public class OrdersTableModel implements TableModel {
             "ADDRESS",
             "DISCOUNT",
             "STATUS",
-            "DATA2",
-            "POSITION"
+            "DATA2"
     };
 
 
     private static final Class<?>[] COLUMN_TYPES = {
             Date.class,
             String.class,
-            String.class,
+            Integer.class,
             Integer.class,
             String.class,
             Integer.class,
-            Date.class,
-            Integer.class
+            Date.class
     };
 
 
@@ -70,7 +65,7 @@ public class OrdersTableModel implements TableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Order o = controller.get(rowIndex);
+        Order o = controller.getOrder(rowIndex);
         switch (columnIndex) {
             case 0:
                 return o.getDate1();
@@ -86,8 +81,7 @@ public class OrdersTableModel implements TableModel {
                 return o.getStatus();
             case 6:
                 return o.getDate2();
-            case 7:
-                return o.getOrderPosition();
+
             default:
                 return null;
         }
@@ -113,38 +107,39 @@ public class OrdersTableModel implements TableModel {
         listeners.remove(l);
     }
 
-    private void fireTableModelEvent(TableModelEvent e) {
+    private void tableModelEvent(TableModelEvent e) {
         for (TableModelListener l : listeners)
             l.tableChanged(e);
     }
 
-    public void addOrders(LocalDate date1, String fio, int phone, String address, int percent, Order.Status status, LocalDate date2, OrderPosition orderPosition) {
+    public void addOrders(Date date1, String fio, int phone, String address, int percent, Order.Status status, Date date2, List<OrderPosition> orderPosition) {
         {
-            controller.add(date1, fio, phone, address, percent, status, date2, orderPosition);
+            controller.add (date1, fio, phone, address, percent, status, date2, orderPosition);
             int rowNum = controller.getOrdersCount() - 1;
-            fireTableModelEvent(new TableModelEvent(this, rowNum, rowNum,
+            tableModelEvent(new TableModelEvent(this, rowNum, rowNum,
                     TableModelEvent.ALL_COLUMNS, TableModelEvent.INSERT));
         }
 
     }
 
-    public void editOrders(int index, LocalDate date1, String fio, int phone, String address, int percent, LocalDate date2, OrderPosition orderPosition) {
-        Order o = controller.get(index);
-        o.setDate2(date2);
+    public void editOrders(int index, Date date1, String fio, Integer phone,
+                           String address, String status, Date date2,
+                           List<OrderPosition> OrderPosition) {
+        Order o = controller.getOrder(index);
+        o.setDate1(date2);
         o.setFio(fio);
         o.setPhone(phone);
         o.setAddress(address);
-        o.setPercent(percent);
         o.setDate2(date2);
-        o.setOrderPosition(orderPosition);
+//        eo.setOrderPosition(); //поправить на выпадающий список???
 
-        fireTableModelEvent(new TableModelEvent(this, index, index,
+        tableModelEvent(new TableModelEvent(this,
                 TableModelEvent.ALL_COLUMNS, TableModelEvent.UPDATE));
     }
 
     public void deleteOrders(int index) {
         controller.remove(index);
-        fireTableModelEvent(new TableModelEvent(this, index, index,
+        tableModelEvent(new TableModelEvent(this, index, index,
                 TableModelEvent.ALL_COLUMNS, TableModelEvent.DELETE));
     }
 

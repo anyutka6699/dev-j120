@@ -1,10 +1,12 @@
 package ru.avalon.java_pp.dev_j120;
 import ru.avalon.java_pp.dev_j120.controllers.OrdersController;
-import ru.avalon.java_pp.dev_j120.io.*;
+import ru.avalon.java_pp.dev_j120.ui.MainFrame;
+
+import java.io.IOException;
 
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         OrdersController controller = new OrdersController();
         
         MainFrame f = new MainFrame(controller);

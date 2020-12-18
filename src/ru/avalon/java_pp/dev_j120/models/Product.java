@@ -1,14 +1,17 @@
 package ru.avalon.java_pp.dev_j120.models;
 
 
-public class Product {
-    private int art;
+import java.io.Serializable;
+
+public class Product implements Serializable {
+    private static final long serialVersionUID = 1L;
+    private long art;
     private String name;
     private String color;
     private Float price;
     private int quantity;
 
-    public Product(int art, String name, String color, Float price, int quantity) {
+    public Product(long art, String name, String color, Float price, int quantity) {
         this.art = art;
         this.name = name;
         this.color = color;
@@ -17,7 +20,7 @@ public class Product {
     }
 
 
-    public int getArt() {
+    public long getArt() {
         return art;
     }
 

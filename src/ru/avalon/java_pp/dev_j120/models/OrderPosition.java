@@ -1,33 +1,30 @@
 package ru.avalon.java_pp.dev_j120.models;
 
 import java.util.Date;
+import java.io.Serializable;
 
-public class OrderPosition {
-    private String product;
-    private Float price;
+
+public class OrderPosition implements Serializable {
+    private static final long serialVersionUID = 1L;
+    private Product product;
     private int quantity;
 
-    public OrderPosition(String product, Float price, int quantity) {
+    public OrderPosition(Product product, int quantity) {
         this.product = product;
-        this.price = price;
         this.quantity = quantity;
     }
 
-    public String getProduct() {
+
+
+
+    public Product getProduct() {
         return product;
     }
 
-    public void setProduct(String product) {
+    public void setProduct(Product product) {
         this.product = product;
     }
 
-    public Float getPrice() {
-        return price;
-    }
-
-    public void setPrice(Float price) {
-        this.price = price;
-    }
 
     public int getQuantity() {
         return quantity;
@@ -35,5 +32,21 @@ public class OrderPosition {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+
+    public long getArt() {
+        return product.getArt();
+    }
+
+    public String getName() {
+        return product.getName();
+    }
+
+    public String getColor() {
+        return product.getColor();
+    }
+
+    public Object getPrice() {return product.getPrice();
     }
 }
