@@ -12,27 +12,38 @@ import static ru.avalon.java_pp.dev_j120.config.Config.address_product;
 public class ProductsStorage {
 
 
+//    public void saveProducts(List<Product> productsList) throws IOException {
+//        try (ObjectOutputStream oos = new ObjectOutputStream(
+//                new FileOutputStream(Config.address_product))) {
+//            for (Product p : productsList) {
+//                oos.writeObject(p);
+//            }
+//        }
+//    }
+
     public void saveProducts(List<Product> productsList) throws IOException {
-        try (ObjectOutputStream oos = new ObjectOutputStream(
-                new FileOutputStream(Config.address_product))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(Config.address_product))) {
             for (Product p : productsList) {
-                oos.writeObject(p);
+                writer.write(p.getArt() + ";" + p.getName() + ";" +p.getColor()+";" + p.getPrice() + ";" + p.getQuantity());
+                writer.newLine();
             }
         }
     }
-        public List<Product> productLoading (String file) throws IOException {
-            List<Product> plist = new ArrayList<>();
-            try (ObjectInputStream reader = new ObjectInputStream(new FileInputStream(file))) {
-                Product p = (Product) reader.readObject();
-                while (p!=null){
-                    plist.add(p);
-                    p = (Product) reader.readObject();
-                }
-            } catch (Exception e){
-                return plist;
+
+
+    public List<Product> productLoading(String filePath) throws IOException {
+        List<Product> listPproducts = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String row;
+            while ((row = reader.readLine()) != null) {
+                String[] splittedRow = row.split(";");
+                Product p = new Product(Long.valueOf(splittedRow[0]), splittedRow[1], splittedRow[2],
+                        Float.valueOf(Long.parseLong(splittedRow[3])), Integer.valueOf(splittedRow[4]));
+                listPproducts.add(p);
             }
-            return plist;
         }
+        return listPproducts;
+    }
 }
 
 

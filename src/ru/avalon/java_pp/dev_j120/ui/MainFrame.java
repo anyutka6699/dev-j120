@@ -53,10 +53,6 @@ public class MainFrame extends JFrame {
         JMenu m = new JMenu("Order operations");
         JMenuItem mi;
 
-        JMenuItem miLoad = new JMenuItem("Загрузить продукты из файла");
-        miLoad.addActionListener(this::productLoading);
-        m.add(miLoad);
-
         mi = new JMenuItem("Добавить новый заказ");
 
         mi.addActionListener(this::addNewOrder);
@@ -115,25 +111,6 @@ public class MainFrame extends JFrame {
 
             }
         });
-    }
-
-
-    private void productLoading(ActionEvent ee) {
-        JFileChooser fileopen = new JFileChooser();
-        int ret = fileopen.showDialog(null, "Открыть файл");
-        File file = null;
-        if (ret == JFileChooser.APPROVE_OPTION) {
-            file = fileopen.getSelectedFile();
-        }
-        if (file == null) {
-            return;
-        }
-        try {
-            pc.productLoading(file.getAbsolutePath());
-//            ProductsTableModel.addProducts();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     private void addNewOrder(ActionEvent ee) {

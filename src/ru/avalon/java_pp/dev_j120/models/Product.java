@@ -3,8 +3,8 @@ package ru.avalon.java_pp.dev_j120.models;
 
 import java.io.Serializable;
 
-public class Product implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class Product {
+    //private static final long serialVersionUID = 1L;
     private long art;
     private String name;
     private String color;
