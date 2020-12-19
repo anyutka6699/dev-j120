@@ -2,16 +2,17 @@ package ru.avalon.java_pp.dev_j120.models;
 
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
-public class Product {
-    //private static final long serialVersionUID = 1L;
+public class Product implements Serializable {
+    private static final long serialVersionUID = 1L;
     private long art;
     private String name;
     private String color;
-    private Float price;
+    private BigDecimal price;
     private int quantity;
 
-    public Product(long art, String name, String color, Float price, int quantity) {
+    public Product(long art, String name, String color, BigDecimal price, int quantity) {
         this.art = art;
         this.name = name;
         this.color = color;
@@ -32,7 +33,7 @@ public class Product {
         return color;
     }
 
-    public Float getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 

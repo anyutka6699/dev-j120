@@ -17,18 +17,8 @@ public class Order implements Serializable {
     private Date date2;
     private List<OrderPosition>  orderPosition;
 
-    public Order(Date date1, String fio, int phone, String address, int percent, Status status, Date date2, List<OrderPosition>  orderPosition) {
-        this.date1 = date1;
-        this.fio = fio;
-        this.phone = phone;
-        this.address = address;
-        this.percent = percent;
-        this.status = status;
-        this.date2 = date2;
-        this.orderPosition = orderPosition;
-    }
 
-    public Order(Date date, String fio, Integer phone, String address, Status status, Date date1, List<OrderPosition> orderPosition) {
+    public Order(Date date1, String fio, Integer phone, String address, Status status, Date date2, List<OrderPosition> orderPosition) {
         this.date1 = date1;
         this.fio = fio;
         this.phone = phone;

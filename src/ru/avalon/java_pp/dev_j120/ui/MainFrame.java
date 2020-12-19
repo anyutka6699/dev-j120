@@ -40,7 +40,7 @@ public class MainFrame extends JFrame {
     public MainFrame(OrdersController controller) throws IOException, ClassNotFoundException {
         super("Учет заказов");
 
-        setBounds(300, 200, 900, 600);
+        setBounds(200, 200, 1000, 500);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         Container c = getContentPane();
@@ -50,7 +50,7 @@ public class MainFrame extends JFrame {
         c.add(new JScrollPane(mainTable), BorderLayout.CENTER);
 
         JMenuBar mb = new JMenuBar();
-        JMenu m = new JMenu("Order operations");
+        JMenu m = new JMenu("Учет заказов");
         JMenuItem mi;
 
         mi = new JMenuItem("Добавить новый заказ");
@@ -82,7 +82,7 @@ public class MainFrame extends JFrame {
                     pc.save();
                     oc.save();
                 } catch (IOException exception) {
-                    throw new RuntimeException("Не удалось сохранить файл");
+                    throw new RuntimeException(exception);
                 }
             }
 
@@ -126,7 +126,7 @@ public class MainFrame extends JFrame {
             Date date2 = ano.getDate2();
             List<OrderPosition> orderPositionList = ano.getOrderPositionList();
             try {
-                ordersTableModel.addOrders(new Date(), fio, phone, address,percent, Order.Status.PREPARING, date2, orderPositionList);
+                ordersTableModel.addOrders(new Date(), fio, phone, address,percent, Order.Status.PREPARING, new Date(), orderPositionList);
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, e.getMessage(),
                         "Error adding Order", JOptionPane.ERROR_MESSAGE);

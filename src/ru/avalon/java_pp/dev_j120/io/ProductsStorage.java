@@ -38,7 +38,7 @@ public class ProductsStorage {
             while ((row = reader.readLine()) != null) {
                 String[] splittedRow = row.split(";");
                 Product p = new Product(Long.valueOf(splittedRow[0]), splittedRow[1], splittedRow[2],
-                        Float.valueOf(Long.parseLong(splittedRow[3])), Integer.valueOf(splittedRow[4]));
+                        BigDecimal.valueOf(Long.parseLong(splittedRow[3])), Integer.valueOf(splittedRow[4]));
                 listPproducts.add(p);
             }
         }

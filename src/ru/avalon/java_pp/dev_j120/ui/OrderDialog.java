@@ -45,76 +45,76 @@ public class OrderDialog extends JDialog {
 
         p = new JPanel(new FlowLayout(FlowLayout.LEFT));
         p.add(new JLabel("ФИО"));
-        fio = new JTextField(40);
+        fio = new JTextField(30);
         p.add(fio);
         topPanel.add(p);
 
         p = new JPanel(new FlowLayout(FlowLayout.LEFT));
         p.add(new JLabel("Телефон"));
-        phone = new JTextField(11);
+        phone = new JTextField(30);
         p.add(phone);
         topPanel.add(p);
 
         p = new JPanel(new FlowLayout(FlowLayout.LEFT));
         p.add(new JLabel("Адрес"));
-        address = new JTextField(60);
+        address = new JTextField(30);
         p.add(address);
         topPanel.add(p);
 
         p = new JPanel(new FlowLayout(FlowLayout.LEFT));
         p.add(new JLabel("Статус заказа "));
-        String[] statusString = {Order.Status.PREPARING.toString(), Order.Status.SHIPPED.toString(), Order.Status.CANCELLED.toString()};
+        String[] statusString = {Order.Status.CANCELLED.toString(),Order.Status.PREPARING.toString(),Order.Status.SHIPPED.toString()};
         this.status = new JComboBox(statusString);
-        status.setSelectedIndex(2);
+        status.setSelectedIndex(1);
         status.setVisible(true);
         p.add(status);
         topPanel.add(p);
 
         p = new JPanel();
-        JButton btn = new JButton("OK");
+        JButton btn = new JButton("Создать заказ");
         btn.addActionListener(e -> {
             modalResult = true;
             dispose();
         });
         p.add(btn);
 
-        btn = new JButton("Cancel");
+        btn = new JButton("Отмена");
         btn.addActionListener(e -> {
             dispose();
         });
         p.add(btn);
 
-//        topPanel.add(p);
-//
-//        getContentPane().add(topPanel, BorderLayout.CENTER);
-//
-//        setResizable(false);
-//        pack();
+        topPanel.add(p);
+
+        getContentPane().add(topPanel, BorderLayout.NORTH);
+
+        setResizable(false);
+        pack();
+
     JPanel addProductsPanel = new JPanel();
     listProducts = new JList(productController.getProducts());
         this.listProducts.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         this.listProducts.setLayoutOrientation(JList.VERTICAL);
         this.listProducts.setVisibleRowCount(-1);
     JScrollPane listScroller = new JScrollPane(this.listProducts);
-        listScroller.setPreferredSize(new Dimension(350, 100));
+        listScroller.setPreferredSize(new Dimension(600, 100));
         addProductsPanel.add(listScroller);
 
-    btn = new JButton("Добавить в заказ");
+    btn = new JButton("Добавить новый заказ");
         btn.addActionListener(this::addProductToOrder);
-
-    JPanel panelWithAmountProducts = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        panelWithAmountProducts.add(new JLabel("Количество товара"));
-        this.amountTextField = new JTextField(10);
-        panelWithAmountProducts.add(amountTextField);
-        amountTextField.setText("1");
-        addProductsPanel.add(panelWithAmountProducts);
-        addProductsPanel.add(btn);
         topPanel.add(addProductsPanel);
+        JPanel panelWithAmount = new JPanel();
+        panelWithAmount.add(new JLabel("Количество товара"));
+        this.amountTextField = new JTextField(30);
+        panelWithAmount.add(amountTextField);
+        amountTextField.setText("1");
+        panelWithAmount.add(btn);
+        topPanel.add(panelWithAmount);
 
-    JPanel panel = new JPanel();
-        panel.add(selectedProductsInOrder.getTableHeader(), BorderLayout.SOUTH);
-        panel.add(new JScrollPane(selectedProductsInOrder), BorderLayout.CENTER);
-
+        Box panel = new Box(BoxLayout.Y_AXIS);
+        selectedProductsInOrder.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+        panel.add(new JScrollPane(selectedProductsInOrder));
+        panel.setPreferredSize(new Dimension(100, 100));
         topPanel.add(panel);
         topPanel.add(p);
     getContentPane().add(topPanel, BorderLayout.CENTER);
