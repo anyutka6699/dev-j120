@@ -155,9 +155,6 @@ public class Order implements Serializable {
         this.date2 = date2;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
-    }
 
     public List<OrderPosition> getOrderPosition() {
         return orderPosition;
@@ -169,9 +166,5 @@ public class Order implements Serializable {
 
     public void setQuantityProducts(int quantityProducts) {
         this.quantityProducts = quantityProducts;
-    }
-
-    public int getQuantityProducts() {
-        return quantityProducts;
     }
 }

@@ -20,7 +20,6 @@ public class Product implements Serializable {
         this.setQuantity (quantity);
     }
 
-
     public long getArt() {
         return art;
     }
@@ -44,7 +43,5 @@ public class Product implements Serializable {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-
-
 
 }

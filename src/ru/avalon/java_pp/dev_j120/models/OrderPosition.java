@@ -1,6 +1,4 @@
 package ru.avalon.java_pp.dev_j120.models;
-
-import java.util.Date;
 import java.io.Serializable;
 
 
@@ -14,9 +12,6 @@ public class OrderPosition implements Serializable {
         this.quantity = quantity;
     }
 
-
-
-
     public Product getProduct() {
         return product;
     }
@@ -29,11 +24,6 @@ public class OrderPosition implements Serializable {
     public int getQuantity() {
         return quantity;
     }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
 
     public long getArt() {
         return product.getArt();

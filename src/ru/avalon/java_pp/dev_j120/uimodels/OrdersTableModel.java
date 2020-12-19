@@ -23,7 +23,6 @@ public class OrdersTableModel implements TableModel {
             "Дата отгрузки заказа"
     };
 
-
     private static final Class<?>[] COLUMN_TYPES = {
             Date.class,
             String.class,
@@ -33,7 +32,6 @@ public class OrdersTableModel implements TableModel {
             Integer.class,
             Date.class
     };
-
 
     private OrdersController controller;
     private List<TableModelListener> listeners;

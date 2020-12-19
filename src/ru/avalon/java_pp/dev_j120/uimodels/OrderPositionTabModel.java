@@ -1,9 +1,6 @@
 package ru.avalon.java_pp.dev_j120.uimodels;
-
 import ru.avalon.java_pp.dev_j120.models.OrderPosition;
 import ru.avalon.java_pp.dev_j120.models.Product;
-import ru.avalon.java_pp.dev_j120.uimodels.*;
-
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
@@ -63,12 +60,18 @@ public class OrderPositionTabModel implements TableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         OrderPosition op = selectedProducts.get(rowIndex);
         switch (columnIndex) {
-            case 0: return op.getArt();
-            case 1: return op.getName();
-            case 2: return op.getColor();
-            case 3: return op.getPrice();
-            case 4: return op.getQuantity();
-            default: return null;
+            case 0:
+                return op.getArt();
+            case 1:
+                return op.getName();
+            case 2:
+                return op.getColor();
+            case 3:
+                return op.getPrice();
+            case 4:
+                return op.getQuantity();
+            default:
+                return null;
         }
     }
 
@@ -96,7 +99,7 @@ public class OrderPositionTabModel implements TableModel {
     }
 
     private void tableModelEvent(TableModelEvent e) {
-        for(TableModelListener l: listeners)
+        for (TableModelListener l : listeners)
             l.tableChanged(e);
     }
 
@@ -105,6 +108,7 @@ public class OrderPositionTabModel implements TableModel {
     }
 
 
-    public void setOrderPosition(List<OrderPosition> orderPosition) {
+    public void setOrderPosition(List<OrderPosition> orderPositionList) {
+        selectedProducts.addAll(orderPositionList);
     }
 }

@@ -23,10 +23,6 @@ public class OrdersController {
                 new Date(), orderPosition));
     }
 
-    public List<Order> ordersLoading() {
-        return ordersStorage.ordersLoading(Config.address_order);
-    }
-
     public void remove(int index) {
         Order c = orders.remove(index);
     }

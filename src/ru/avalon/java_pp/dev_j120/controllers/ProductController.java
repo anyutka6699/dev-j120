@@ -22,14 +22,6 @@ public class ProductController {
         return this.products;
     }
 
-    public int getProductsCount() {
-        return this.products.size();
-    }
-
-    public Product getProduct(int index) {
-        return products.get(index);
-    }
-
     public Object[] getProducts() {
         Object[] result = new Object[products.size()];
         for (int i = 0; i < result.length; i++) {
@@ -48,15 +40,6 @@ public class ProductController {
             }
         }
         return null;
-    }
-
-    public void decreaseProducts(Product p, int Q) {
-        int currentStockQuantity = p.getQuantity();
-        if (currentStockQuantity - Q < 0) {
-            throw new RuntimeException(
-                    String.format(p.toString()));// обработка исключения (удаляем больше чем есть)
-        }
-        p.setQuantity(currentStockQuantity - Q);
     }
 
 }

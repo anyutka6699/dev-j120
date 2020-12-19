@@ -153,5 +153,6 @@ public class MainFrame extends JFrame {
        oc.remove(row);
         ordersTableModel.removeOrders(row);
     }
+
 }
 
