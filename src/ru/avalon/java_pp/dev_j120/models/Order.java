@@ -1,7 +1,6 @@
 package ru.avalon.java_pp.dev_j120.models;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -13,6 +12,7 @@ public class Order implements Serializable {
     private int phone;
     private String address;
     private int percent;
+    private int quantityProducts;
     private Status status;
     private Date date2;
     private List<OrderPosition>  orderPosition;
@@ -24,6 +24,7 @@ public class Order implements Serializable {
         this.phone = phone;
         this.address = address;
         this.percent = percent;
+        this.quantityProducts = quantityProducts;
         this.status = status;
         this.date2 = date2;
         this.orderPosition = orderPosition;
@@ -86,10 +87,10 @@ public class Order implements Serializable {
             if (obj.date1 == this.date1
                     && obj.fio.equals(this.fio)
                     && obj.phone == (this.phone)
-                    && obj.address == (this.address)
+                    && obj.address.equals(this.address)
                     && obj.status == (this.status)
-                    && obj.date2 == (this.date2)
-            ) {
+                    && obj.date2 == this.date2)
+            {
                 return true;
             } else {
                 return false;
@@ -117,7 +118,7 @@ public class Order implements Serializable {
         this.fio = fio;
     }
 
-    public int getPhone() {
+    public Integer getPhone() {
         return phone;
     }
 
@@ -154,11 +155,9 @@ public class Order implements Serializable {
         this.date2 = date2;
     }
 
-//    public ru.avalon.java_pp.dev_j120.models.OrderPosition
-//    getOrderPosition() {
-//        return OrderPosition;
-//    }
-
+    public void setStatus(Status status) {
+        this.status = status;
+    }
 
     public List<OrderPosition> getOrderPosition() {
         return orderPosition;
@@ -168,5 +167,11 @@ public class Order implements Serializable {
         this.orderPosition = orderPosition;
     }
 
+    public void setQuantityProducts(int quantityProducts) {
+        this.quantityProducts = quantityProducts;
+    }
 
+    public int getQuantityProducts() {
+        return quantityProducts;
+    }
 }

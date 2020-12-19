@@ -40,9 +40,7 @@ public class OrderDialog extends JDialog {
 
         JPanel topPanel = new JPanel();
         topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.Y_AXIS));
-
         JPanel p;
-
         p = new JPanel(new FlowLayout(FlowLayout.LEFT));
         p.add(new JLabel("ФИО"));
         fio = new JTextField(30);
@@ -85,24 +83,22 @@ public class OrderDialog extends JDialog {
         p.add(btn);
 
         topPanel.add(p);
-
         getContentPane().add(topPanel, BorderLayout.NORTH);
-
         setResizable(false);
         pack();
 
-    JPanel addProductsPanel = new JPanel();
+    JPanel addProducts = new JPanel();
     listProducts = new JList(productController.getProducts());
         this.listProducts.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         this.listProducts.setLayoutOrientation(JList.VERTICAL);
         this.listProducts.setVisibleRowCount(-1);
     JScrollPane listScroller = new JScrollPane(this.listProducts);
         listScroller.setPreferredSize(new Dimension(600, 100));
-        addProductsPanel.add(listScroller);
+        addProducts.add(listScroller);
 
     btn = new JButton("Добавить новый заказ");
         btn.addActionListener(this::addProductToOrder);
-        topPanel.add(addProductsPanel);
+        topPanel.add(addProducts);
         JPanel panelWithAmount = new JPanel();
         panelWithAmount.add(new JLabel("Количество товара"));
         this.amountTextField = new JTextField(30);
@@ -123,12 +119,26 @@ public class OrderDialog extends JDialog {
     pack();
 }
 
+    public OrderDialog(MainFrame owner, ProductController productController, Order order) {
+        this(owner, productController);
+        fio.setText(order.getFio());
+        phone.setText(String.valueOf(order.getPhone()));
+        address.setText(order.getAddress());
+        orderPositionTabModel.setOrderPosition(order.getOrderPosition());
+    }
+
     public String getFio() {
         return fio.getText();
     }
 
 
     public Integer getPhone() {
+        if (percent== null){
+            return 0;
+        }
+        if (percent.getText().isEmpty()){
+            return 0;
+        }
         return Integer.valueOf(phone.getText());
     }
 
@@ -154,7 +164,7 @@ public class OrderDialog extends JDialog {
         } else {
             orderPositionTabModel.addOrderPosition(p, requestedQuantity);
         }
-    }
+}
 
     public Date getDate1() {
         try {

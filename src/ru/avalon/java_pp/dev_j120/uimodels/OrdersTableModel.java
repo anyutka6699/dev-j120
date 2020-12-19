@@ -14,13 +14,13 @@ import ru.avalon.java_pp.dev_j120.models.OrderPosition;
 
 public class OrdersTableModel implements TableModel {
     private static final String[] COLUMN_HEADERS = {
-            "DATA",
-            "FIO",
-            "PHONE",
-            "ADDRESS",
-            "DISCOUNT",
-            "STATUS",
-            "DATA2"
+            "Дата заказа",
+            "Фамилия Имя Отчество",
+            "Телефон",
+            "Адрес",
+            "Скидка",
+            "Статус заказа",
+            "Дата отгрузки заказа"
     };
 
 
@@ -45,7 +45,7 @@ public class OrdersTableModel implements TableModel {
 
     @Override
     public int getRowCount() {
-        return controller.getOrdersCount();
+        return controller.getOrdersQ();
     }
 
     @Override
@@ -115,15 +115,16 @@ public class OrdersTableModel implements TableModel {
     public void addOrders(Date date1, String fio, int phone, String address, int percent, Order.Status status, Date date2, List<OrderPosition> orderPosition) {
         {
             controller.add (date1, fio, phone, address, percent, status, date2, orderPosition);
-            int rowNum = controller.getOrdersCount() - 1;
+            int rowNum = controller.getOrdersQ() - 1;
             tableModelEvent(new TableModelEvent(this, rowNum, rowNum,
                     TableModelEvent.ALL_COLUMNS, TableModelEvent.INSERT));
         }
 
     }
 
+
     public void editOrders(int index, Date date1, String fio, Integer phone,
-                           String address, String status, Date date2,
+                           String address, Date date2,
                            List<OrderPosition> OrderPosition) {
         Order o = controller.getOrder(index);
         o.setDate1(date2);
@@ -131,16 +132,24 @@ public class OrdersTableModel implements TableModel {
         o.setPhone(phone);
         o.setAddress(address);
         o.setDate2(date2);
-//        eo.setOrderPosition(); //поправить на выпадающий список???
+        o.setOrderPosition(OrderPosition);
+        int newQuantityProducts = 0;
+        for(OrderPosition or : OrderPosition) {
+            newQuantityProducts += or.getQuantity();
+        }
+        o.setQuantityProducts(newQuantityProducts);
 
         tableModelEvent(new TableModelEvent(this,
                 TableModelEvent.ALL_COLUMNS, TableModelEvent.UPDATE));
     }
 
-    public void deleteOrders(int index) {
-        controller.remove(index);
+    public void renewalOrders(int index) {
+        tableModelEvent(new TableModelEvent(this, index, index,
+                TableModelEvent.ALL_COLUMNS, TableModelEvent.UPDATE));
+    }
+
+    public void removeOrders(int index) {
         tableModelEvent(new TableModelEvent(this, index, index,
                 TableModelEvent.ALL_COLUMNS, TableModelEvent.DELETE));
     }
-
 }

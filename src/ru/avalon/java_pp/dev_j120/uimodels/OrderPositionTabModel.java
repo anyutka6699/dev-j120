@@ -12,11 +12,11 @@ import java.util.List;
 
 public class OrderPositionTabModel implements TableModel {
     private static final String[] COLUMN_HEADERS = {
-            "ART",
-            "NAME",
-            "COLOR",
-            "PRICE",
-            "QUANTITY"
+            "Артикул",
+            "Название",
+            "Цвет",
+            "Цена",
+            "Количество"
     };
 
     private static final Class<?>[] COLUMN_TYPES = {
@@ -105,4 +105,6 @@ public class OrderPositionTabModel implements TableModel {
     }
 
 
+    public void setOrderPosition(List<OrderPosition> orderPosition) {
+    }
 }

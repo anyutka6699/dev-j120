@@ -1,15 +1,11 @@
 package ru.avalon.java_pp.dev_j120.controllers;
-
 import ru.avalon.java_pp.dev_j120.config.Config;
 import ru.avalon.java_pp.dev_j120.io.ProductsStorage;
 import ru.avalon.java_pp.dev_j120.models.Product;
-
 import java.io.IOException;
 import java.util.List;
 
-
 public class ProductController {
-
     public ProductsStorage productStorage = new ProductsStorage();
     private List<Product> products = productStorage.productLoading(Config.address_product );
 
@@ -20,7 +16,6 @@ public class ProductController {
         productStorage.saveProducts(products);
 
     }
-
 
     public List<Product> productLoading(String path) throws IOException {
         products.addAll(productStorage.productLoading(path));
@@ -37,14 +32,12 @@ public class ProductController {
 
     public Object[] getProducts() {
         Object[] result = new Object[products.size()];
-
         for (int i = 0; i < result.length; i++) {
             Product p = products.get(i);
             if (p.getQuantity() > 0) {
                 result[i] = p.getArt() + "; " + p.getName() + ";  " + p.getColor() + ";  " + p.getPrice();
             }
         }
-
         return result;
     }
 
@@ -55,6 +48,15 @@ public class ProductController {
             }
         }
         return null;
+    }
+
+    public void decreaseProducts(Product p, int Q) {
+        int currentStockQuantity = p.getQuantity();
+        if (currentStockQuantity - Q < 0) {
+            throw new RuntimeException(
+                    String.format(p.toString()));// обработка исключения (удаляем больше чем есть)
+        }
+        p.setQuantity(currentStockQuantity - Q);
     }
 
 }
