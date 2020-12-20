@@ -54,8 +54,16 @@ public class MainFrame extends JFrame {
         mi.addActionListener(this::editOrders);
         m.add(mi);
 
-        mi = new JMenuItem("Удалить заказ");
+        mi = new JMenuItem("Отправить заказ");
+        mi.addActionListener(this::shippedOrder);
+        m.add(mi);
+
+        mi = new JMenuItem("Отменить заказ");
         mi.addActionListener(e -> cancelOrder());
+        m.add(mi);
+
+        mi = new JMenuItem("Удалить заказ");
+        mi.addActionListener(e -> deleteOrder());
         m.add(mi);
 
         mb.add(m);
@@ -146,12 +154,44 @@ public class MainFrame extends JFrame {
 
     }
 
-    private void cancelOrder() {
+    private void deleteOrder() {
         int row = mainTable.getSelectedRow();
         if(row == -1)
             return;
        oc.remove(row);
         ordersTableModel.removeOrders(row);
+    }
+
+    private void shippedOrder(ActionEvent ee) {
+        int row = mainTable.getSelectedRow();
+        if(row == -1)
+            return;
+        Order order = oc.getOrder(row);
+        if (Order.Status.PREPARING.toString().equals(order.getStatus())) {
+            order.setStatus(Order.Status.SHIPPED);
+            JOptionPane.showMessageDialog(this, "Заказ исполнен",
+                    "Ошибка добавления заказа", JOptionPane.OK_OPTION);
+        } else if (Order.Status.SHIPPED.toString().equals(order.getStatus())) {
+            JOptionPane.showMessageDialog(this, "Заказ доставлен",
+                    "Ошибка добавления заказа", JOptionPane.ERROR_MESSAGE);
+        } else if (Order.Status.CANCELLED.toString().equals(order.getStatus())) {
+            JOptionPane.showMessageDialog(this, "Заказ отменен",
+                    "Ошибка добавления заказа", JOptionPane.ERROR_MESSAGE);
+        }
+        ordersTableModel.renewalOrders(row);
+    }
+
+    private void cancelOrder() {
+        int row = mainTable.getSelectedRow();
+        if(row == -1)
+            return;
+        Order order = oc.getOrder(row);
+        if (Order.Status.PREPARING.toString().equals(order.getStatus())) {
+            order.setStatus(Order.Status.CANCELLED);
+            JOptionPane.showMessageDialog(this, "Заказ отменен",
+                    "Ошибка добавления заказа", JOptionPane.OK_OPTION);
+        }
+        ordersTableModel.renewalOrders(row);
     }
 
 }

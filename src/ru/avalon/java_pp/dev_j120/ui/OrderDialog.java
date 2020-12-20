@@ -23,7 +23,6 @@ public class OrderDialog extends JDialog {
     private JTextField phone;
     private JTextField address;
     private JTextField percent;
-    private JComboBox  status;
     private JTextField date2;
     private JTextField orderPosition;
     private JTextField amountTextField;
@@ -59,14 +58,6 @@ public class OrderDialog extends JDialog {
         p.add(address);
         topPanel.add(p);
 
-        p = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        p.add(new JLabel("Статус заказа "));
-        String[] statusString = {Order.Status.CANCELLED.toString(),Order.Status.PREPARING.toString(),Order.Status.SHIPPED.toString()};
-        this.status = new JComboBox(statusString);
-        status.setSelectedIndex(1);
-        status.setVisible(true);
-        p.add(status);
-        topPanel.add(p);
 
         p = new JPanel();
         JButton btn = new JButton("Создать заказ");
@@ -133,10 +124,10 @@ public class OrderDialog extends JDialog {
 
 
     public Integer getPhone() {
-        if (percent== null){
+        if (phone== null){
             return 0;
         }
-        if (percent.getText().isEmpty()){
+        if (phone.getText().isEmpty()){
             return 0;
         }
         return Integer.valueOf(phone.getText());

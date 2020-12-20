@@ -30,6 +30,7 @@ public class Order implements Serializable {
         this.orderPosition = orderPosition;
     }
 
+
     public enum Status {
         PREPARING("готовится"),
         SHIPPED("отгружен"),
@@ -166,5 +167,9 @@ public class Order implements Serializable {
 
     public void setQuantityProducts(int quantityProducts) {
         this.quantityProducts = quantityProducts;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }
